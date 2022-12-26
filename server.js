@@ -29,18 +29,10 @@ app.get('/', (req, res) => {
   res.send('Welcome to my base project!')
 })
 
-app.get('/user', async function(req, res) {
+// routes
+require('./app/routes/auth.routes')(app);
+require('./app/routes/user.routes')(app);
 
-  const users = await db.User.findAll();
-
-  res.respond(users, 200);
-});
-
-app.get('/404', async function(req, res) {
-
-
-  res.failNotFound("Resource not found");
-});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
