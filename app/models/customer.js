@@ -11,17 +11,27 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Customer, {
-        as: 'Customer',
-        foreignKey: "userId",
+      // this.belongsTo(models.Customer, {
+      //   as: 'Customer',
+      //   foreignKey: "userId",
+      // })
+      this.belongsToMany(models.Product, {
+        through: 'orders',
+        foreignKey: "customerId",
+        otherKey: "productId",
       })
     }
   }
   Customer.init({
-    notelp: DataTypes.INTEGER,
-    address: DataTypes.STRING,
-    age: DataTypes.INTEGER,
-    birthdate: DataTypes.DATE,
+    telp: DataTypes.INTEGER,
+    nik: DataTypes.INTEGER,
+    alamat: DataTypes.STRING,
+    tanggal_lahir: DataTypes.DATE,
+    jenis_kelamin: {
+      type: DataTypes.ENUM,
+      values: ["L", "P"],
+      defaultValue: "L",
+    },
     userId: DataTypes.INTEGER
   }, {
     sequelize,

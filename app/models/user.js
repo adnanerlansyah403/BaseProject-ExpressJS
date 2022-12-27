@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasOne(models.Customer, {
-        as: 'Customer',
+        as: 'User',
+        onDelete: "cascade",
+        onUpdate: "cascade"
       })
       this.belongsToMany(models.Role, {
         through: "user_roles",
